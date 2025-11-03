@@ -12,13 +12,20 @@ import Header from "../components/layout/Header";
 export const Home = () => {
   const navigate = useNavigate();
   const [productions, setProductions] = useState<Production[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   useEffect(() => {
     const allProductions = getAllProductions();
     setProductions(allProductions);
   }, []);
 
-  const filteredProductions = productions;
+  // Obtener categorías únicas
+  const categories = ["all", ...Array.from(new Set(productions.map(p => p.category)))];
+
+  // Filtrar producciones por categoría
+  const filteredProductions = productions.filter((prod) => {
+    return selectedCategory === "all" || prod.category === selectedCategory;
+  });
 
   const handleProductionClick = (productionId: string) => {
     navigate(`/production/${productionId}`);
@@ -38,17 +45,66 @@ export const Home = () => {
       <div
         style={{
           padding: "0 20px",
+          marginTop: "24px",
         }}
       >
+        {/* Selector de categorías */}
         <div
           style={{
             display: "flex",
-            gap: "16px",
+            gap: "8px",
             flexWrap: "wrap",
-            marginBottom: "32px",
+            marginBottom: "20px",
             alignItems: "center",
           }}
-        ></div>
+        >
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              style={{
+                padding: "6px 16px",
+                borderRadius: "20px",
+                border: selectedCategory === category ? "1px solid #467e03" : "1px solid #d1d5cc",
+                backgroundColor: selectedCategory === category ? "#467e03" : "white",
+                color: selectedCategory === category ? "white" : "#5a5a52",
+                fontSize: "13px",
+                fontWeight: selectedCategory === category ? "600" : "500",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                textTransform: "capitalize",
+              }}
+              onMouseEnter={(e) => {
+                if (selectedCategory !== category) {
+                  e.currentTarget.style.borderColor = "#467e03";
+                  e.currentTarget.style.backgroundColor = "#f5f8f2";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (selectedCategory !== category) {
+                  e.currentTarget.style.borderColor = "#d1d5cc";
+                  e.currentTarget.style.backgroundColor = "white";
+                }
+              }}
+            >
+              {category === "all" ? "Todas" : category}
+            </button>
+          ))}
+        </div>
+
+        {/* Contador de resultados */}
+        <div
+          style={{
+            marginBottom: "20px",
+            fontSize: "14px",
+            color: "#9fa499",
+            fontWeight: "500",
+          }}
+        >
+          {filteredProductions.length}{" "}
+          {filteredProductions.length === 1 ? "producción" : "producciones"}
+        </div>
+
         {/* Grid de producciones */}
         {filteredProductions.length > 0 ? (
           <div

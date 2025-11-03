@@ -45,7 +45,7 @@ export const ProductionCard = ({ production, onClick }: ProductionCardProps) => 
         style={{
           position: 'relative',
           width: '100%',
-          paddingBottom: '75%', // Ratio 4:3
+          paddingBottom: '120%', // Ratio más vertical para mayor altura
           overflow: 'hidden',
           backgroundColor: '#f3f4f6',
         }}
