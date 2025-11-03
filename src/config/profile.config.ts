@@ -4,7 +4,7 @@
 
 export const profileConfig = {
   name: 'Magalí Matas',
-  photo: '/src/assets/images/models/user_avatar.JPG',
+  photo: '/images/models/user_avatar.JPG',
   role: 'Modelo & Actriz Profesional',
   
   social: {

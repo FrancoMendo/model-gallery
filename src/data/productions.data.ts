@@ -11,7 +11,7 @@ import type { Production } from '../types/production.types';
 const generatePhotos = (productionId: number, totalPhotos: number) => {
   return Array.from({ length: totalPhotos }, (_, index) => ({
     id: `p${productionId}-${index + 1}`,
-    url: `/src/assets/images/models/production_${productionId}_item_${index + 1}.JPG`,
+    url: `/images/models/production_${productionId}_item_${index + 1}.JPG`,
     alt: /* `Producción ${productionId} - Foto ${index + 1}` */  "",
   }));
 };
@@ -21,7 +21,7 @@ export const mockProductions: Production[] = [
     id: '2',
     title: 'Sesión Artística',
     description: 'Producción artística con fotografías conceptuales y creativas, explorando diferentes ángulos y composiciones.',
-    coverImage: '/src/assets/images/models/production_2_item_1.JPG',
+    coverImage: '/images/models/production_2_item_1.JPG',
     category: 'Artística',
     date: new Date('2024-11-11'),
     location: 'Estudio',
@@ -33,7 +33,7 @@ export const mockProductions: Production[] = [
     id: '3',
     title: 'Polaroid Collection',
     description: 'Colección de fotografías con estética polaroid. Sesión espontánea y natural capturando momentos únicos.',
-    coverImage: '/src/assets/images/models/production_3_item_1.JPG',
+    coverImage: '/images/models/production_3_item_1.JPG',
     category: 'Polaroid',
     date: new Date('2025-01-03'),
     location: 'Estudio',
@@ -45,7 +45,7 @@ export const mockProductions: Production[] = [
     id: '4',
     title: 'Producción fotografica',
     description: 'Primera producción profesional del año. Sesión con diferentes looks y estilos variados.',
-    coverImage: '/src/assets/images/models/production_4_item_1.JPG',
+    coverImage: '/images/models/production_4_item_1.JPG',
     category: 'Editorial',
     date: new Date('2024-10-02'),
     location: 'Exterior',
@@ -57,7 +57,7 @@ export const mockProductions: Production[] = [
     id: '5',
     title: 'TEC Italy Studio',
     description: 'Sesión fotográfica para TEC Italy. Producción en estudio con iluminación profesional.',
-    coverImage: '/src/assets/images/models/production_5_item_1.JPG',
+    coverImage: '/images/models/production_5_item_1.JPG',
     category: 'Comercial',
     date: new Date('2024-11-04'),
     location: 'Estudio',
@@ -69,7 +69,7 @@ export const mockProductions: Production[] = [
     id: '6',
     title: 'Veganis Campaign',
     description: 'Campaña fotográfica para Veganis. Producción enfocada en lifestyle y producto vegano.',
-    coverImage: '/src/assets/images/models/production_6_item_1.JPG',
+    coverImage: '/images/models/production_6_item_1.JPG',
     category: 'Comercial',
     date: new Date('2024-11-04'),
     location: 'Exteriores',
