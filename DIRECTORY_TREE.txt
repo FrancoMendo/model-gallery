@@ -1,0 +1,114 @@
+model_galery/
+│
+├── public/
+│   └── vite.svg
+│
+├── src/
+│   │
+│   ├── assets/                          # 🎨 Recursos estáticos
+│   │   ├── images/
+│   │   │   ├── models/                  # Fotos de modelos y actrices
+│   │   │   │   └── .gitkeep
+│   │   │   └── banners/                 # Banners y hero images
+│   │   │       └── .gitkeep
+│   │   ├── icons/                       # Iconos SVG personalizados
+│   │   │   └── .gitkeep
+│   │   └── react.svg
+│   │
+│   ├── components/                      # 🧩 Componentes React
+│   │   ├── common/                      # Componentes base reutilizables
+│   │   │   ├── Button.tsx
+│   │   │   └── Card.tsx
+│   │   ├── gallery/                     # Componentes de galería
+│   │   │   └── GalleryGrid.tsx
+│   │   ├── layout/                      # Componentes de layout
+│   │   │   ├── Header.tsx
+│   │   │   └── Footer.tsx
+│   │   └── models/                      # Componentes de modelos
+│   │       └── ModelCard.tsx
+│   │
+│   ├── pages/                           # 📄 Páginas principales
+│   │   ├── Home.tsx
+│   │   ├── Gallery.tsx
+│   │   └── ModelDetail.tsx
+│   │
+│   ├── hooks/                           # 🪝 Custom React Hooks
+│   │   └── useGallery.ts
+│   │
+│   ├── services/                        # 🌐 Servicios de API
+│   │   ├── api.ts
+│   │   └── modelService.ts
+│   │
+│   ├── types/                           # 📝 Tipos TypeScript
+│   │   ├── model.types.ts
+│   │   ├── gallery.types.ts
+│   │   └── index.ts
+│   │
+│   ├── utils/                           # 🛠️ Utilidades
+│   │   ├── constants.ts
+│   │   └── formatters.ts
+│   │
+│   ├── styles/                          # 🎨 Estilos
+│   │   └── variables.css
+│   │
+│   ├── contexts/                        # 🔄 React Context
+│   │   └── [vacío - listo para agregar]
+│   │
+│   ├── config/                          # ⚙️ Configuración
+│   │   └── app.config.ts
+│   │
+│   ├── data/                            # 💾 Datos mock
+│   │   └── models.data.ts
+│   │
+│   ├── App.tsx                          # Componente raíz
+│   ├── App.css
+│   ├── main.tsx                         # Punto de entrada
+│   └── index.css
+│
+├── .env.example                         # Ejemplo de variables de entorno
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── README.md                            # Documentación principal
+├── PROJECT_STRUCTURE.md                 # Guía detallada de estructura
+├── DIRECTORY_TREE.txt                   # Este archivo (visualización)
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+═══════════════════════════════════════════════════════════════════
+
+📊 RESUMEN DE CARPETAS
+
+✅ Estructura completamente creada y lista para usar
+✅ Archivos de ejemplo y plantillas incluidos
+✅ Tipos TypeScript definidos
+✅ Servicios de API configurados
+✅ Hooks personalizados creados
+✅ Componentes base implementados
+✅ Configuración de estilos con variables CSS
+✅ Datos mock para desarrollo
+✅ Documentación completa
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 PRÓXIMOS PASOS SUGERIDOS:
+
+1. Revisar el archivo PROJECT_STRUCTURE.md para entender la organización
+2. Configurar variables de entorno (.env)
+3. Instalar dependencias adicionales según necesites:
+   - React Router para navegación
+   - Tailwind CSS o styled-components para estilos
+   - Zustand o Redux para estado global
+   - React Query para gestión de datos
+
+4. Implementar componentes faltantes según tu diseño
+5. Conectar con un backend o API
+6. Agregar tests (Jest, React Testing Library)
+7. Configurar CI/CD
+
+═══════════════════════════════════════════════════════════════════
+

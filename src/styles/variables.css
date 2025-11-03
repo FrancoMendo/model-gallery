@@ -1,0 +1,155 @@
+/**
+ * Variables CSS globales
+ */
+
+:root {
+  /* Colores principales - Paleta Verde Formal */
+  --color-primary-50: #f3f7ed;
+  --color-primary-100: #e3efd4;
+  --color-primary-200: #c9dfad;
+  --color-primary-300: #a8ca7e;
+  --color-primary-400: #89b554;
+  --color-primary: #467e03;
+  --color-primary-600: #3d6f03;
+  --color-primary-700: #335c02;
+  --color-primary-800: #2a4902;
+  --color-primary-900: #1f3601;
+  
+  --color-primary-dark: #335c02;
+  --color-primary-light: #89b554;
+  
+  --color-secondary: #5a9308;
+  --color-secondary-dark: #3d6f03;
+  --color-secondary-light: #6ba912;
+  
+  --color-accent: #6ba912;
+  
+  /* Colores de estado */
+  --color-success: #5a9308;
+  --color-warning: #d4a017;
+  --color-error: #b91c1c;
+  --color-info: #3b6b8f;
+  
+  /* Colores neutrales - Grises con tinte verde */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-50: #f8f9f7;
+  --color-gray-100: #f0f2ed;
+  --color-gray-200: #e3e6df;
+  --color-gray-300: #c9cdc4;
+  --color-gray-400: #9fa499;
+  --color-gray-500: #707066;
+  --color-gray-600: #57574f;
+  --color-gray-700: #3f3f39;
+  --color-gray-800: #2a2a26;
+  --color-gray-900: #1a1a18;
+  
+  /* Colores de fondo */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-gray-50);
+  --bg-tertiary: var(--color-gray-100);
+  --bg-dark: var(--color-gray-900);
+  
+  /* Colores de texto */
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-700);
+  --text-tertiary: var(--color-gray-500);
+  --text-muted: var(--color-gray-400);
+  --text-inverse: var(--color-white);
+  --text-accent: var(--color-primary);
+  
+  /* Tipografía */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
+    sans-serif;
+  --font-family-heading: 'Inter', var(--font-family-base);
+  --font-family-mono: 'Fira Code', 'Courier New', monospace;
+  
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Espaciado */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+  
+  /* Bordes */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --border-radius-full: 9999px;
+  
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  
+  /* Transiciones */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+  
+  /* Z-index */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  
+  /* Breakpoints (para uso en JS) */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  
+  /* Layout */
+  --container-max-width: 1280px;
+  --header-height: 80px;
+  --footer-height: 200px;
+}
+
+/* Tema oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: var(--color-gray-900);
+    --bg-secondary: var(--color-gray-800);
+    --bg-dark: var(--color-black);
+    
+    --text-primary: var(--color-gray-50);
+    --text-secondary: var(--color-gray-300);
+    --text-muted: var(--color-gray-500);
+    --text-inverse: var(--color-gray-900);
+  }
+}
+
