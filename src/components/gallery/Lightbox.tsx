@@ -289,8 +289,8 @@ export const Lightbox = ({
       >
         <img
           key={currentPhoto.id}
-          src={currentPhoto.url}
-          alt={currentPhoto.alt}
+          src={`${import.meta.env.VITE_API_URL || "https://api-model-gallery-production.francomendodev.workers.dev"}/images/${currentPhoto.id}`}
+          alt={currentPhoto.alt || 'Foto'}
           draggable={false}
           style={{
             maxWidth: '100%',

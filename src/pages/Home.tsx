@@ -21,13 +21,16 @@ export const Home = () => {
         const res = await fetch(`${API_URL}/productions`);
         const data = await res.json();
 
-        // Mapear los datos de la API para asegurar que la imagen tenga la URL completa
         const mappedProductions = (data.productions || []).map((p: any) => ({
           ...p,
-          category: p.category || "General", // Fallback por si no tienes categoría en BD
+          category: p.type || p.category || "General", // Fallback por si no tienes categoría en BD
           coverImage: p.coverImage
             ? `${API_URL}${p.coverImage}`
             : "https://via.placeholder.com/400x600?text=Sin+Imagen",
+          photos: (p.photos || []).map((photo: any) => ({
+            ...photo,
+            url: `${API_URL}${photo.url}`
+          }))
         }));
 
         setProductions(mappedProductions);
@@ -49,8 +52,8 @@ export const Home = () => {
     return selectedCategory === "all" || prod.category === selectedCategory;
   });
 
-  const handleProductionClick = (productionId: string) => {
-    navigate(`/production/${productionId}`);
+  const handleProductionClick = (production: any) => {
+    navigate(`/production/${production.id}`, { state: { production } });
   };
 
   return (
@@ -141,7 +144,7 @@ export const Home = () => {
               <ProductionCard
                 key={production.id}
                 production={production}
-                onClick={() => handleProductionClick(production.id)}
+                onClick={() => handleProductionClick(production)}
               />
             ))}
           </div>

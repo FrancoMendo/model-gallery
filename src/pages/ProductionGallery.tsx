@@ -3,27 +3,52 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import type { Production } from '../types/production.types';
-import { getProductionById } from '../data/productions.data';
 import Lightbox from '../components/gallery/Lightbox';
 import Header from '../components/layout/Header';
+
+const API_URL = import.meta.env.VITE_API_URL || "https://api-model-gallery-production.francomendodev.workers.dev";
 
 export const ProductionGallery = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [production, setProduction] = useState<Production | null>(null);
+  const location = useLocation();
+  const [production, setProduction] = useState<Production | null>(location.state?.production || null);
+  const [isLoading, setIsLoading] = useState(!production);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   useEffect(() => {
-    if (id) {
-      const prod = getProductionById(id);
-      if (prod) {
-        setProduction(prod);
-      }
+    if (!production && id) {
+      const fetchProduction = async () => {
+        try {
+          const res = await fetch(`${API_URL}/productions/${id}`);
+          const data = await res.json();
+          if (data.production) {
+            const p = data.production;
+            const mappedProduction = {
+              ...p,
+              category: p.type || p.category || "General",
+              coverImage: p.coverImage ? `${API_URL}${p.coverImage}` : "https://via.placeholder.com/400x600?text=Sin+Imagen",
+              photos: (p.photos || []).map((photo: any) => ({
+                ...photo,
+                url: `${API_URL}${photo.url}`
+              }))
+            };
+            setProduction(mappedProduction);
+          }
+        } catch (error) {
+          console.error("Error fetching production:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchProduction();
+    } else {
+      setIsLoading(false);
     }
-  }, [id]);
+  }, [id, production]);
 
   const openLightbox = (index: number) => {
     setCurrentPhotoIndex(index);
@@ -49,6 +74,14 @@ export const ProductionGallery = () => {
       );
     }
   };
+
+  if (isLoading) {
+    return (
+      <div style={{ padding: '40px', textAlign: 'center' }}>
+        <h2>Cargando...</h2>
+      </div>
+    );
+  }
 
   if (!production) {
     return (
@@ -166,7 +199,7 @@ export const ProductionGallery = () => {
             {production.date && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span>📅</span>
-                <span>{production.date.toLocaleDateString('es-ES')}</span>
+                <span>{new Date(production.date).toLocaleDateString('es-ES')}</span>
               </div>
             )}
             
@@ -218,8 +251,8 @@ export const ProductionGallery = () => {
               }}
             >
               <img
-                src={photo.url}
-                alt={photo.alt}
+                src={`${API_URL}/images/${photo.id}`}
+                alt={photo.alt || `Foto ${index + 1}`}
                 style={{
                   position: 'absolute',
                   top: 0,
