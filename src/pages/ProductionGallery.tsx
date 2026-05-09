@@ -3,52 +3,26 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import type { Production } from '../types/production.types';
 import Lightbox from '../components/gallery/Lightbox';
 import Header from '../components/layout/Header';
-
-const API_URL = import.meta.env.VITE_API_URL || "https://api-model-gallery-production.francomendodev.workers.dev";
+import { useProductionsQuery } from '../hooks/useProductionsQuery';
 
 export const ProductionGallery = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const location = useLocation();
-  const [production, setProduction] = useState<Production | null>(location.state?.production || null);
-  const [isLoading, setIsLoading] = useState(!production);
+  const { data: productions = [], isLoading } = useProductionsQuery();
+  const [production, setProduction] = useState<Production | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   useEffect(() => {
-    if (!production && id) {
-      const fetchProduction = async () => {
-        try {
-          const res = await fetch(`${API_URL}/productions/${id}`);
-          const data = await res.json();
-          if (data.production) {
-            const p = data.production;
-            const mappedProduction = {
-              ...p,
-              category: p.type || p.category || "General",
-              coverImage: p.coverImage ? `${API_URL}${p.coverImage}` : "https://via.placeholder.com/400x600?text=Sin+Imagen",
-              photos: (p.photos || []).map((photo: any) => ({
-                ...photo,
-                url: `${API_URL}${photo.url}`
-              }))
-            };
-            setProduction(mappedProduction);
-          }
-        } catch (error) {
-          console.error("Error fetching production:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchProduction();
-    } else {
-      setIsLoading(false);
+    if (!isLoading && id) {
+      const found = productions.find((p: any) => p.id === id);
+      setProduction(found || null);
     }
-  }, [id, production]);
+  }, [id, productions, isLoading]);
 
   const openLightbox = (index: number) => {
     setCurrentPhotoIndex(index);
@@ -61,7 +35,7 @@ export const ProductionGallery = () => {
 
   const nextPhoto = () => {
     if (production) {
-      setCurrentPhotoIndex((prev) => 
+      setCurrentPhotoIndex((prev) =>
         prev === production.photos.length - 1 ? 0 : prev + 1
       );
     }
@@ -69,7 +43,7 @@ export const ProductionGallery = () => {
 
   const previousPhoto = () => {
     if (production) {
-      setCurrentPhotoIndex((prev) => 
+      setCurrentPhotoIndex((prev) =>
         prev === 0 ? production.photos.length - 1 : prev - 1
       );
     }
@@ -87,7 +61,7 @@ export const ProductionGallery = () => {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
         <h2>Producción no encontrada</h2>
-        <button 
+        <button
           onClick={() => navigate('/')}
           style={{
             marginTop: '20px',
@@ -115,7 +89,7 @@ export const ProductionGallery = () => {
   }
 
   return (
-    <div style={{ 
+    <div style={{
       minHeight: '100vh',
       backgroundColor: '#f8f9f7',
     }}>
@@ -174,7 +148,7 @@ export const ProductionGallery = () => {
           }}>
             {production.title}
           </h1>
-          
+
           <p style={{
             fontSize: '18px',
             color: '#3f3f39',
@@ -195,21 +169,21 @@ export const ProductionGallery = () => {
               <span>📂</span>
               <span>{production.category}</span>
             </div>
-            
+
             {production.date && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span>📅</span>
                 <span>{new Date(production.date).toLocaleDateString('es-ES')}</span>
               </div>
             )}
-            
+
             {production.location && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span>📍</span>
                 <span>{production.location}</span>
               </div>
             )}
-            
+
             {production.photographer && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span>📷</span>
@@ -251,7 +225,7 @@ export const ProductionGallery = () => {
               }}
             >
               <img
-                src={`${API_URL}/images/${photo.id}`}
+                src={photo.url}
                 alt={photo.alt || `Foto ${index + 1}`}
                 style={{
                   position: 'absolute',
@@ -263,9 +237,9 @@ export const ProductionGallery = () => {
                 }}
                 loading="lazy"
               />
-              
+
               {/* Overlay con número */}
-            {/*   <div style={{
+              {/*   <div style={{
                 position: 'absolute',
                 top: '12px',
                 left: '12px',
