@@ -77,7 +77,7 @@ export const Lightbox = ({
 
   const handleTouchEnd = () => {
     if (!isDragging) return;
-    
+
     const swipeThreshold = 100; // Mínimo de píxeles para considerar un swipe
     const swipeDistance = touchStart - touchEnd;
 
@@ -93,7 +93,7 @@ export const Lightbox = ({
         onPrevious();
       }
     }
-    
+
     setIsDragging(false);
     setTouchStart(0);
     setTouchEnd(0);
@@ -117,7 +117,7 @@ export const Lightbox = ({
 
   const handleMouseUp = () => {
     if (!isDragging) return;
-    
+
     const swipeThreshold = 100; // Aumentado para evitar clicks accidentales
     const swipeDistance = touchStart - touchEnd;
 
@@ -132,7 +132,7 @@ export const Lightbox = ({
         onPrevious();
       }
     }
-    
+
     setIsDragging(false);
     setTouchStart(0);
     setTouchEnd(0);
@@ -210,6 +210,21 @@ export const Lightbox = ({
       onMouseLeave={handleMouseLeave}
       onWheel={handleWheel}
     >
+      <style>{`
+        .lightbox-image-container {
+          width: calc(100% - 180px);
+          max-width: 1200px;
+        }
+        @media (max-width: 768px) {
+          .nav-button {
+            display: none !important;
+          }
+          .lightbox-image-container {
+            width: 100% !important;
+          }
+        }
+      `}</style>
+
       {/* Botón cerrar */}
       <button
         onClick={onClose}
@@ -217,10 +232,12 @@ export const Lightbox = ({
           position: 'absolute',
           top: '20px',
           right: '20px',
-          background: 'rgba(255, 255, 255, 0.1)',
+          background: 'rgba(51, 49, 49, 0.1)',
           border: 'none',
           color: 'white',
           fontSize: '32px',
+          lineHeight: '1',
+          paddingBottom: '4px',
           width: '50px',
           height: '50px',
           borderRadius: '50%',
@@ -282,8 +299,8 @@ export const Lightbox = ({
           cursor: isDragging ? 'grabbing' : 'grab',
           userSelect: 'none',
           opacity: isAnimating ? 0.4 : 1,
-          transition: isDragging 
-            ? 'none' 
+          transition: isDragging
+            ? 'none'
             : 'opacity 0.15s ease-in-out',
         }}
       >
@@ -331,7 +348,7 @@ export const Lightbox = ({
             {currentPhoto.alt}
           </div>
         )}
-        
+
         {/* Botones de navegación */}
         <div
           style={{
@@ -349,7 +366,7 @@ export const Lightbox = ({
             }}
             disabled={photos.length <= 1}
             style={{
-              background: photos.length <= 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.15)',
+              background: photos.length <= 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(51, 49, 49, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.3)',
               color: 'white',
               fontSize: '20px',
@@ -371,7 +388,7 @@ export const Lightbox = ({
             }}
             onMouseLeave={(e) => {
               if (photos.length > 1) {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                e.currentTarget.style.background = 'rgba(51, 49, 49, 0.1)';
                 e.currentTarget.style.transform = 'scale(1)';
               }
             }}
@@ -405,7 +422,7 @@ export const Lightbox = ({
             }}
             disabled={photos.length <= 1}
             style={{
-              background: photos.length <= 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.15)',
+              background: photos.length <= 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(51, 49, 49, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.3)',
               color: 'white',
               fontSize: '20px',
@@ -427,7 +444,7 @@ export const Lightbox = ({
             }}
             onMouseLeave={(e) => {
               if (photos.length > 1) {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                e.currentTarget.style.background = 'rgba(51, 49, 49, 0.1)';
                 e.currentTarget.style.transform = 'scale(1)';
               }
             }}
@@ -436,7 +453,7 @@ export const Lightbox = ({
             →
           </button>
         </div>
-        
+
         {/* Hint de navegación */}
         <div
           style={{
